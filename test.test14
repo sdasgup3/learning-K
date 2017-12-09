@@ -1,0 +1,4 @@
+testUExtractMInt(90, 8)
+testLExtractMInt(90, 8)
+testS(90, 8)
+testS(255, 8)

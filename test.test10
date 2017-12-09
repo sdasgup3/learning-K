@@ -1,0 +1,3 @@
+.section .text
+_start:
+  add(10,20)
