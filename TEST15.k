@@ -2,22 +2,28 @@ requires "domains.k"
 
 module TEST15-SYNTAX
     imports MINT
-    syntax Task ::=  "m2f" "(" Int "," Int ")" [function]
-                  | "f2m"  "(" Float ")" [function]
+    imports FLOAT
 
+    syntax Task ::=  "test" "(" Int "," Float  "," Int "," Int "," Int ")" [function]
+    | "sub" "(" Int "," Int "," Int "," Int "," Int "," Int")" [function]
+    | "add" "(" Int "," Int "," Int "," Int "," Int "," Int")" [function]
     syntax Tasks ::= List{Task, ""} 
 endmodule
 
 module TEST15
     imports TEST15-SYNTAX
-    imports FLOAT
 
     configuration <k>$PGM:Tasks</k>
 
     rule T:Task Ts:Tasks => T ~> Ts
-    
-    syntax KItem ::=  temp(Int, MInt)
-    rule m2f(I,W) => MInt2Float(mi(W,I), 24,8 )
-    rule f2m(F) => temp(exponentFloat(F), significandFloat(F))
+    rule test(I, F,  W, P, E) =>  eqMInt(mi(W, I), Float2MInt(MInt2Float(mi(W,I), P,E), W)) 
+                                andBool F ==Float MInt2Float(Float2MInt(F,W), P, E) 
+                                andBool MInt2Float(mi(W,I), P,E) ==Float F 
+                                andBool eqMInt(Float2MInt(F,W), mi(W,I))
 
+    //To test that the precision and exponent information are not modified over Float operations.
+    rule sub(I, J, K, W, P, E) => eqMInt(Float2MInt(MInt2Float(mi(W, I), P, E) -Float MInt2Float(mi(W, J), P, E), W),
+                    mi(W, K))
+    rule add(I, J, K, W, P, E) => eqMInt(Float2MInt(MInt2Float(mi(W, I), P, E) +Float MInt2Float(mi(W, J), P, E), W),
+                    mi(W, K))
 endmodule
