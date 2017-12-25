@@ -1,0 +1,3 @@
+update(%rax, 20,64)
+add(%rax, 30,64)
+show(%rax)  

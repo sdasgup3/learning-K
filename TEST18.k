@@ -63,9 +63,9 @@ module TEST18
     rule convertFpsToInts(F Fs) => Float2Int(F) convertFpsToInts(Fs)
     rule convertFpsToInts(.Floats) => .Ints
 
-    syntax MInts ::= convertIntsToMints(Ints, Int) [function]
-    rule convertIntsToMints(I Is, W) => mi(I, W) convertIntsToMints(Is, W)
-    rule convertIntsToMints(.Ints, _) => .MInts
+    syntax MInts ::= convertIntsToMInts(Ints, Int) [function]
+    rule convertIntsToMInts(I Is, W) => mi(I, W) convertIntsToMInts(Is, W)
+    rule convertIntsToMInts(.Ints, _) => .MInts
 
     syntax Floats ::= convertFloatsToDoubles(Floats) [function]
     rule convertFloatsToDoubles(F Fs) => Float2Double(F) convertFloatsToDoubles(Fs)
@@ -81,13 +81,12 @@ module TEST18
 
     // PS <-> PD
     rule cvtps2pd(I, IW, T) =>  eqMInt(mi( 2*Int IW, T), joinVector(convertFpsToMints(convertFloatsToDoubles(convertMIntsToFps(splitVector(mi(IW,I), 32), 24, 8)), 64)))
-    //rule cvtpd2ps(I, IW) =>  joinVector(convertFpsToMints(convertDoublesToFloats(convertMIntsToFps(splitVector(mi(IW,I), 64), 53, 11)), 32))
+    //rule cvtpd2ps(I, IW) => 
     //rule testSplitJoin(I, IW) => joinVector(splitVector(mi(IW,I), 32))
 
     // PD/PS -> double word
     // rule cvtpd2dq(I, IW) => 
-    rule cvtps2dq(I, IW, T) =>  convertFpsToInts(convertMIntsToFps(splitVector(mi(IW,I), 32), 24, 8))
-    //rule cvtps2dq(I, IW, T) =>  joinVector(convertIntsToMints(convertFpsToInts(convertMIntsToFps(splitVector(mi(IW,I), 32), 24, 8)), 32))
+    //rule cvtps2dq(I, IW, T) =>  convertIntsToMInts(convertFpsToInts(convertMIntsToFps(splitVector(mi(IW,I), 32), 24, 8)), 32)
 
 
     // rule cvttps2dq(I, IW) => 
