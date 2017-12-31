@@ -18,7 +18,7 @@ module TEST26
 
     rule T:Task Ts:Tasks => T ~> Ts
 
-    rule <k> test(I) => .Tasks
+    rule <k> test(I) => .
     ...</k>
     	<state> MI => addMInt(MI, mi(64, I)) </state>
    
