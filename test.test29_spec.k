@@ -4,6 +4,6 @@ module TEST29-SPEC
 rule
   <k> task   =>  . </k>
   <state> 
-    "AB" |-> ( mi(64,?I:Int):MInt => _ ) 
+    "AB" |-> ( mi(64,?I:Int) => _ ) 
   </state>
 endmodule

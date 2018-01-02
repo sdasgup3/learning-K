@@ -1,10 +1,12 @@
 requires "domains.k"
 
+// Error on recursion with #if $else
+
 module TEST30-SYNTAX
     imports MINT
     //see what happens when u have function at List
     syntax Task ::=  "addcount" "(" Int")" 
-    syntax Tasks ::= List{Task, ""} [function]
+    syntax Tasks ::= List{Task, ""} [klabel(tasklist)]
 
 endmodule
 
@@ -26,6 +28,7 @@ module TEST30
       requires I =/=Int 0
 
 
-    // rule countOnes(I:Int, C:Int) => #if I ==Int 0 #then C #else countOnes(I -Int 1, C +Int 1) #fi
+
+     //rule countOnes(I:Int, C:Int) => #if I ==Int 0 #then C #else countOnes(I -Int 1, C +Int 1) #fi
                                         
 endmodule

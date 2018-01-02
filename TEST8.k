@@ -5,7 +5,7 @@ module TEST8-SYNTAX
     //see what happens when u have function at List
     syntax Task ::=  "task" "(" Int "," Int ")" 
                   | "testExtractMInt" "(" Int "," Int ")"
-    syntax Tasks ::= List{Task, ""} [function]
+    syntax Tasks ::= List{Task, ""} [klabel(tasklist)]
 
     /*
     syntax MInt ::= intermed(MInt) [function]

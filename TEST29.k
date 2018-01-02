@@ -22,14 +22,13 @@ module TEST29
 
     syntax MInt ::= extractValue(Map) [function]
 
-    /*
     rule extractValue(RSMap)  =>  mi(64,100)
       requires zeroMInt(RSMap["AB"]:>MInt) 
     
     rule extractValue(RSMap)  =>  mi(64,200)
       requires notBool zeroMInt(RSMap["AB"]:>MInt) 
-    */
-    rule extractValue(RSMap)  =>  (#if zeroMInt(RSMap["AB"]:>MInt) #then mi(64,100) #else mi(64,200) #fi):>MInt
+
+    // rule extractValue(RSMap)  =>  #if zeroMInt(RSMap["AB"]:>MInt) #then mi(64,100) #else mi(64,200) #fi
 
     syntax KItem ::= intermediate(MInt)
 
@@ -38,10 +37,10 @@ module TEST29
         <state>  RSMap </state>
 
     rule 
-      <k> intermediate(MI) => zeroMInt(MI)
+      <k> intermediate(MI) => .
       ...</k>
-
-
-
+      <state>...
+        "AB" |-> (MIold => addMInt(MIold, MI))
+      ...</state>
 
 endmodule

@@ -4,7 +4,7 @@ module TEST7-SYNTAX
     imports MINT
     //see what happens when u have function at List
     syntax Task ::=  "popcount" "(" Int "," Int ")" 
-    syntax Tasks ::= List{Task, ""} [function]
+    syntax Tasks ::= List{Task, ""} [klabel(tasklist)]
 
 endmodule
 
