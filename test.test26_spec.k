@@ -6,6 +6,6 @@ rule
   <state> mi(64,10) => mi(64,11) </state>
 
 rule
-  <k> test(1) test(2) => .Tasks </k>
+  <k> test(1) test(2) test(3) => test(3) .Tasks </k>
   <state> mi(64,10) => mi(64,13) </state>
 endmodule
