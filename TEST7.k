@@ -15,7 +15,7 @@ module TEST7
 
     rule T:Task Ts:Tasks => T ~> Ts
 
-    syntax MInt ::= countOnes(MInt, Int) [function]
+    syntax MInt ::= countOnes(MInt, Int) 
 
     rule <k> popcount(N:Int, W:Int) => countOnes(mi(W,N), 0)
     ...</k>

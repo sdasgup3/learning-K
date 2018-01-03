@@ -29,8 +29,14 @@ module TEST33
     syntax Int ::= "XX" 
 
     // rule addMInt(mi(64, I), #parseToken("MInt@MINT", "64'0"):>MInt) => mi(64, I)
-    rule addMInt(mi(64, XX), mi(64, 0)) => mi(64, 0) [lemma]
+    //rule addMInt(mi(64, XX), mi(64, 0)) => mi(64, 0) [lemma]
+    rule addMInt(_:MInt, MI) => mi(64, 0)
+      requires eqMInt(MI, mi(64,0))
+
+
+
     rule xorMInt(mi(W, I), mi(W, I)) => mi(W, 0)              [lemma]
+
     rule subMInt(mi(W, I), mi(W, I)) => mi(W, 0)              [lemma]
     rule bitwidthMInt(mi(W:Int, _:Int)) => W
     rule xorMInt(MI:MInt, MI:MInt) => mi(bitwidthMInt(MI), 0)              [lemma]
@@ -40,7 +46,7 @@ module TEST33
     ...</k>
       <state> ...
             //"AB" |->  (MI1 => addMInt(MI1, #parseToken("MInt@MINT","64'0"):>MInt))
-            "AB" |->  (MI1 => addMInt(MI1, mi(bitwidthMInt(MI1), 0)))
+            "AB" |->  (MI1 => addMInt(MI1, mi(64, 0)))
             "CD" |->  (MI2 => xorMInt(MI2, MI2))
             "EF" |->  (MI3 => subMInt(MI3, MI3))
             ...

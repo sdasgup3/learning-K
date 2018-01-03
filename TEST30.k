@@ -17,18 +17,11 @@ module TEST30
 
     rule T:Task Ts:Tasks => T ~> Ts
 
-    syntax Int ::= countOnes(Int, Int) [function]
+    syntax Int ::= countOnes(Int, Int)
 
     rule <k> addcount(N:Int) => countOnes(N, 0)
     ...</k>
 
-    rule countOnes(I:Int, C:Int) => C
-      requires I ==Int 0
-    rule countOnes(I:Int, C:Int) => countOnes(I -Int 1, C +Int 1)
-      requires I =/=Int 0
-
-
-
-     //rule countOnes(I:Int, C:Int) => #if I ==Int 0 #then C #else countOnes(I -Int 1, C +Int 1) #fi
+    rule countOnes(I:Int, C:Int) => #if I ==Int 0 #then C #else countOnes(I -Int 1, C +Int 1) #fi
                                         
 endmodule
