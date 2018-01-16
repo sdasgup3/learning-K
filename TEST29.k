@@ -30,7 +30,13 @@ module TEST29
       requires notBool zeroMInt(RSMap["AB"]:>MInt) 
     */
 
-    rule extractValue(RSMap)  =>  #if zeroMInt(RSMap["AB"]:>MInt) #then mi(64,100) #else mi(64,200) #fi
+
+    syntax MInt ::= "#ifMInt" Bool "#then" MInt "#else" MInt "#fi" [function, smtlib(ite)]
+
+    rule #ifMInt B #then W #else _ #fi => W requires B
+    rule #ifMInt B #then _ #else W #fi => W requires notBool B
+
+    rule extractValue(RSMap)  =>  #ifMInt zeroMInt(RSMap["AB"]:>MInt) #then mi(64,100) #else mi(64,200) #fi
 
     syntax KItem ::= intermediate(MInt)
 
