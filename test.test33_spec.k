@@ -8,6 +8,7 @@ rule
     "CD" |-> (mi(64, I2:Int) => _)  
     "EF" |-> (mi(64, I3:Int) => _)  
     "GH" |-> (?B:Bool => _)
+    "IJ" |-> (?I:Int => _)
   </state>
 
 endmodule
