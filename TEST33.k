@@ -21,6 +21,7 @@ module TEST33
       "AB" |-> mi(64, 10):MInt
       "CD" |-> mi(64, 1)
       "EF" |-> mi(64, 2)
+      "GH" |-> ?B:Bool
     </state>
     </T>
 
@@ -41,6 +42,9 @@ module TEST33
     rule bitwidthMInt(mi(W:Int, _:Int)) => W
     rule xorMInt(MI:MInt, MI:MInt) => mi(bitwidthMInt(MI), 0)              [lemma]
 
+    rule ultMInt(_:MInt, MI) =>  false   
+     requires eqMInt(MI, mi(64,0))
+
 
     rule <k> task => . 
     ...</k>
@@ -49,7 +53,7 @@ module TEST33
             "AB" |->  (MI1 => addMInt(MI1, mi(64, 0)))
             "CD" |->  (MI2 => xorMInt(MI2, MI2))
             "EF" |->  (MI3 => subMInt(MI3, MI3))
-            ...
-      </state>
+            "GH" |->  (_ => ultMInt(addMInt(MI1, MI2), mi(64, 0)))
+      ...  </state>
 
 endmodule
