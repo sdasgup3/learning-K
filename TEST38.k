@@ -1,6 +1,8 @@
 requires "domains.k"
 
 // rules involving same hask keys
+// [Error] Critical: failed to concatenate maps with common keys:
+
 
 
 module TEST38-SYNTAX
@@ -8,7 +10,8 @@ module TEST38-SYNTAX
   syntax Instruction ::=  Opcode Typedoperands
         
   syntax Opcode ::= "vmovdqa" [token]
-  | "vmovdqu" [token]
+                    | "vmovdqu" [token]
+                    | "xchg" [token]
   syntax Typedoperands ::= List{Typeoperand, ","} [klabel(typeoperandlist)]
   syntax Typeoperand ::=  Register
   syntax Register ::= R64
@@ -47,6 +50,10 @@ module TEST38
   syntax R64 ::= convSubRegsToRegs(Register) [function]
   syntax Ymm ::= convSubRegsToRegs(Register) [function]
 
+  syntax MInt ::= getRegisterValue(Register,  Map)  [function]
+   rule getRegisterValue(R:Register,  RSMap:Map)  =>  RSMap[convToRegKeys(R)]:>MInt
+  
+
   rule convToRegKeysHelper(%ymm0)  => "YMM0"
   rule convToRegKeysHelper(%ymm1)  => "YMM1"
   rule convToRegKeysHelper(%rax)  => "RAX"
@@ -57,28 +64,35 @@ module TEST38
   rule convSubRegsToRegs(%ymm0 )  => %ymm0
   rule convSubRegsToRegs(%ymm1 )  => %ymm1
 
+  rule mi(256, uvalueMInt(extractMInt(MI1, 0, 256))) => MI1
+
+
+   rule <k>
+    execinstr (xchg R1:Ymm, R2:Ymm,  .Typedoperands) => .
+  ...</k>
+    <state> ...
+      //convToRegKeys(R1) |-> (MI1:MInt => MI2)
+      convToRegKeys(R1) |-> (MI1:MInt => MI2)
+      convToRegKeys(R2) |-> (MI2:MInt => mi(256, uvalueMInt(extractMInt(MI1, 0, 256))))
+      //convToRegKeys(R2) |-> (MI2:MInt => mi(256, uvalueMInt(extractMInt(MI1, 128, 256))))
+    ... </state>
 
    rule <k>
     execinstr (vmovdqa R1:Ymm, R2:Ymm,  .Typedoperands) => .
   ...</k>
-    <state> ...
-  convToRegKeys(R1) |-> (MI676 => MI676)
+    <state> 
+    RSMap:Map => updateMap(RSMap, 
+        
+        convToRegKeys(R2) |-> ( mi(256, uvalueMInt(extractMInt(getRegisterValue(R1, RSMap), 128, 256))) ) 
+        )
+    </state>
 
-  convToRegKeys(R2) |-> ( _ => MI676 )
-
-
-    ...</state>
-
-   rule <k>
-    execinstr (vmovdqu R1:Ymm, R2:Ymm,  .Typedoperands) => .
-  ...</k>
-    <state> ...
-  convToRegKeys(R1) |-> (MI676:MInt => MI676)
-
-  convToRegKeys(R2) |-> ( _ => MI676 )
-
-
-    ...</state>
-
+    /*
+    <state>
+    (convToRegKeys(R2) |->  MI2) RSMap:Map 
+    => 
+    (convToRegKeys(R2) |-> mi(256, uvalueMInt(extractMInt(getRegisterValue(R1, RSMap), 128, 256))) ) RSMap
+    </state>
+    */
 endmodule
 

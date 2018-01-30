@@ -18,4 +18,4 @@ all clean: ${TESTS}
 
 %_spec:%_spec.k
 		X=$$(echo $< | cut -d '.' -f 1 | tr A-Z a-z);
-		krun --prove $< dummy.k  --smt_prelude /home/sdasgup3/Github/k/k-distribution/include/z3/basic.smt2
+		time krun --prove $< dummy.k  --smt_prelude /home/sdasgup3/Github/k/k-distribution/include/z3/basic.smt2

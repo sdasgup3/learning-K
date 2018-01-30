@@ -1,3 +1,2 @@
 execinstr (vmovdqa %ymm0, %ymm0)
-execinstr (vmovdqa %ymm0, %ymm1)
-execinstr (vmovdqa %ymm1, %ymm1)
+execinstr(xchg %ymm0, %ymm0)
