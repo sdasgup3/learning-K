@@ -1,0 +1,25 @@
+<T>
+  <k>
+    .Tasks
+  </k>
+  <regstate>
+    <gpr>
+      <rax>
+        5
+      </rax>
+    </gpr>
+    <flag>
+      <cf>
+        2
+      </cf>
+    </flag>
+  </regstate>
+  <regstatequeue>
+    ListItem ( <gpr>-fragment <rax>
+      65
+    </rax> </gpr>-fragment )
+    ListItem ( <gpr>-fragment <rax>
+      5
+    </rax> </gpr>-fragment )
+  </regstatequeue>
+</T>

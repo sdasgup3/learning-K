@@ -1,0 +1,8 @@
+<T>
+  <k>
+    .Tasks
+  </k>
+  <state>
+    mulMInt ( addMInt ( V0 , 64'2 ) , 64'3 )
+  </state>
+</T>

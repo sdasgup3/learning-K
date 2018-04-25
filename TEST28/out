@@ -1,0 +1,12 @@
+<T>
+  <k>
+    task3 ( 2 , 3 ) ~> task3 ( 2 , 2 )  .Tasks
+  </k>
+  <state>
+    "RBP" |-> addMInt ( V0 , 64'7 )
+    "RSP" |-> addMInt ( V1 , 64'8 )
+  </state>
+  <result>
+    .List
+  </result>
+</T>

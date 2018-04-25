@@ -11,11 +11,14 @@ all clean: ${TESTS}
 
 .ONESHELL:
 %:%.k
-		rm -rf *-kompiled;
-		kompile $< --debug -v;
+#rm -rf *-kompiled;
+#kompile $< --debug -v;
+		kompile $< --debug --backend java;
 		X=$$(echo $< | cut -d '.' -f 1 | tr A-Z a-z);
-		krun test.$${X} --debug
+		krun test.$${X}    --debug 
 
 %_spec:%_spec.k
 		X=$$(echo $< | cut -d '.' -f 1 | tr A-Z a-z);
-		time krun --prove $< dummy.k  --smt_prelude /home/sdasgup3/Github/k/k-distribution/include/z3/basic.smt2
+		time krun --prove $< dummy.k  --smt_prelude /home/sdasgup3/Github/k5/k-distribution/include/z3/basic.smt2
+
+#kprove   TEST29-SPEC.k ../dummy.k  --smt_prelude /home/sdasgup3/Github/k5/k-distribution/include/z3/basic.smt2 

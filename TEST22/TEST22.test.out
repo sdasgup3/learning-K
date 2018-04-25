@@ -1,0 +1,17 @@
+<T>
+  <k>
+    .Program
+  </k>
+  <cmem>
+    0 |-> storeInstr ( add %al , %bh , .Operands )
+  </cmem>
+  <nextloc>
+    1
+  </nextloc>
+  <rax>
+    0
+  </rax>
+  <rbx>
+    0
+  </rbx>
+</T>
