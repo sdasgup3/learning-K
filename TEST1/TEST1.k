@@ -1,9 +1,11 @@
-requires "domains.k"
 
 module TEST1-SYNTAX
     imports DOMAINS-SYNTAX
 
-    syntax Task ::=  "convert" "(" String "," Int ")" [function]
+    syntax HexConstant ::=  r"$0x[0-9a-fA-F]+" [prefer, token, prec(2)]
+    syntax Imm ::=   "$" Int
+                  | HexConstant
+    syntax Task ::=  "convert" "(" Imm "," Int ")" [function]
     syntax Tasks ::= List{Task, ""}
 endmodule
 
@@ -15,7 +17,12 @@ module TEST1
 
     rule T:Task Ts:Tasks => T ~> Ts
 
-    syntax Int ::= HexStringtToInt(String, Int)  [function, hook(STRING.string2base)]
-    rule convert(S:String, I:Int) => mi(String2Base(S, 16), 64)
+    rule 1 *Int I:Int => I
 
+    syntax String ::= HexConstant2String ( HexConstant )    [function, hook(STRING.token2string)]
+    rule convert((H:HexConstant):Imm, I:Int) => 
+              mi(I, String2Base(substrString(HexConstant2String(H), 3, lengthString(HexConstant2String(H))), 16))
+    rule convert(($ M:Int):Imm, I:Int) => 
+              mi(I, M)
+    
 endmodule
