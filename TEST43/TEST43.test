@@ -1,0 +1,5 @@
+execinst(sub 20(%rax), %rbx)
+execinst(add %rbx, 20(%rax))
+execinst(add 20(%rbx), %rax, %rbx)
+execinst(add %rbx, 20(%rax), %rbx)
+execinst(add %rbx, %rax, 20(%rbx))
