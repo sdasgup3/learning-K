@@ -1,4 +1,4 @@
-// config
+// Passing List
 module TEST41-SYNTAX
     imports LIST
 
