@@ -1,0 +1,8 @@
+.section .text
+.globl start
+
+_start:
+  add rax, rbx
+test:
+  sub rax, rbx
+_tes.t:
