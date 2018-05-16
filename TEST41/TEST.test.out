@@ -1,0 +1,9 @@
+<T>
+  <k>
+    config ( ListItem ( "apple" )
+    ListItem ( "mango" ) )
+  </k>
+  <store>
+    0
+  </store>
+</T>
