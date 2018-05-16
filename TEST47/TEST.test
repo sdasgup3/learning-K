@@ -4,5 +4,4 @@
 _start:
   add rax, rbx
 test:
-  sub rax, rbx
-_tes.t:
+  callq test
