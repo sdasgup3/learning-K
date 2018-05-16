@@ -1,9 +1,13 @@
-<T>
-  <k>
-    config ( ListItem ( "apple" )
-    ListItem ( "mango" ) )
-  </k>
-  <store>
-    0
-  </store>
-</T>
+[Error] Outer Parser: Encountered "(".
+Was expecting one of: [<DOTK>, "#token", "#klabel", <ID_KLABEL>, <KVARIABLE>,
+"`"] (Encountered " "(" "( "" at line 1, column 1.
+Was expecting one of:
+    <DOTK> ...
+    "#token" ...
+    "#klabel" ...
+    <ID_KLABEL> ...
+    <KVARIABLE> ...
+    "`" ...
+    )
+	Source(<command line: -cARGV>)
+	Location(1,1,1,1)

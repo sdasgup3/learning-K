@@ -13,3 +13,10 @@ Learning Experience on defining language semantics using [K](https://github.com/
   ~~make test.test_spec~~
   cat filelist.txt | parallel "echo {}; cd {}; kprove {}-SPEC.k ../dummy.k --smt_prelude /home/sdasgup3/Github/k5/k-distribution/include/z3/basic.smt2 ; cd .."
   ```
+
+
+# Contents
+
+| Test Name  | Purpose  | 
+|------------|----------|
+| TEST41     | Passing config valriable using -c -p flags    |
