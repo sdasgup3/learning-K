@@ -1,6 +1,6 @@
 // HexConstant
 // Macro
-module TEST1-SYNTAX
+module TEST-SYNTAX
     imports DOMAINS-SYNTAX
 
     syntax HexConstant ::=  r"$0x[0-9a-fA-F]+" [prefer, token, prec(2)]
@@ -11,8 +11,8 @@ module TEST1-SYNTAX
     syntax Tasks ::= List{Task, ""}
 endmodule
 
-module TEST1
-    imports TEST1-SYNTAX
+module TEST
+    imports TEST-SYNTAX
     imports MINT
 
     configuration <k>$PGM:Tasks</k>

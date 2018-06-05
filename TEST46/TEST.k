@@ -1,8 +1,12 @@
 // Passing List
 module TEST-SYNTAX
     imports LIST
+    imports MAP
+    imports INT
+    imports STRING
 
-    syntax KItem ::=  "convert" "(" List ")" 
+    syntax SList ::= List{String, ""}
+    syntax Task ::=  "convert" "(" SList ")" 
 endmodule
 
 module TEST
@@ -12,14 +16,14 @@ module TEST
 
     configuration 
     <T>
-      <k> convert($ARGV:List) </k>
+      <k> $PGM:Task </k>
       <store> 0 </store>
     </T>
 
-    rule <k> convert(.List)   => . 
+    rule <k> convert(.SList)   => . 
     ...</k>
 
-    rule <k> convert(ListItem(S:String) Rest:List)   => convert(Rest)
+    rule <k> convert(S:String Rest:SList)   => convert(Rest)
     ...</k>
     <store> N => N +Int lengthString(S) </store>
 
