@@ -1,5 +1,6 @@
 // krun   '-cARGV0=#token("1","Int")' '-pARGV0=printf %s'  TEST.test 
 // krun   '-cARGV1=mi(#token("64","Int"),#token("0","Int"))' '-pARGV1=printf %s' TEST.test
+// krun   '-cARGV2=#token("\"mango\"","String")' '-pARGV2=printf %s'      TEST.test 
 
 module TEST-SYNTAX
     imports MAP
