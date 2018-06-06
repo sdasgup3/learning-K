@@ -1,5 +1,5 @@
-module TEST36-SPEC
-  imports TEST36
+module TEST-SPEC
+  imports TEST
 
 rule
   <k>  maintask => . </k>

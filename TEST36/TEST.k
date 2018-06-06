@@ -3,7 +3,7 @@ requires "domains.k"
 // kprove runtime
 
 
-module TEST36-SYNTAX
+module TEST-SYNTAX
   imports DOMAINS-SYNTAX
   imports MINT
     syntax Task ::= "maintask" 
@@ -13,8 +13,8 @@ module TEST36-SYNTAX
 
 endmodule
 
-module TEST36
-    imports TEST36-SYNTAX
+module TEST
+    imports TEST-SYNTAX
       imports DOMAINS
 
 
