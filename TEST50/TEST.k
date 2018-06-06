@@ -1,17 +1,12 @@
-//  krun '-cARGV0=#token("30","Int")' '-pARGV0=printf %s'  '-cARGV1=mi(#token("64","Int"),#token("30","Int"))' '-pARGV1=printf %s'  '-cARGV2=`_List_`(`ListItem`(#token("\"apple\"","String@STRING-SYNTAX")),`_List_`(`ListItem`(#token("\"mango\"","String@STRING-SYNTAX")),`.List`(.KList))))))'  '-pARGV2=printf %s' TEST.test
-
-
-// Or Use krun '-cARGV0=10' '-cARGV1=mi(64, 10)'  TEST.test // only for mint and
-// int args
+// krun   '-cARGV0=#token("1","Int")' '-pARGV0=printf %s'  TEST.test 
+// krun   '-cARGV1=mi(#token("64","Int"),#token("0","Int"))' '-pARGV1=printf %s' TEST.test
 
 module TEST-SYNTAX
-    imports MINT
     imports MAP
-    imports STRING
     imports INT
-    syntax Task ::= "task" "(" Int ")" 
-
-    syntax Tasks ::= List{Task, ""}
+    imports MINT
+    imports STRING
+    syntax Task ::= "task" "(" MInt ")" 
 
 endmodule
 
@@ -19,27 +14,15 @@ module TEST
     imports TEST-SYNTAX
 
     configuration 
-      <k> $PGM:Tasks </k>
-      <regstate1> $ARGV0:Int </regstate1>
-      <regstate2> $ARGV1:MInt </regstate2>
-      //<regstate3> $ARGV2:List </regstate3>
-      <regstate4> $ARGV3:Map </regstate4>
-
-    rule <k>
-      T:Task Ts:Tasks =>  T ~> Ts
-    </k>
+      <k> $PGM:Task </k>
+      <regstate0> $ARGV0:Int </regstate0>
+      <regstate1> $ARGV1:MInt </regstate1>
+      <regstate2> $ARGV2:String </regstate2>
 
     rule <k>  
-    //task(M:Map) => 0
-    //task(L:List) => 0
-    task(I:Int) => 0
+    task(MI:MInt) => 0
     ...</k>
-    <regstate1> I:Int </regstate1>
-    <regstate2> MI:MInt </regstate2>
-    //<regstate3> L:List </regstate3>
-      <regstate4> M:Map </regstate4>
-    
-
-    
-
+    <regstate0> I:Int </regstate0>
+    <regstate1> MI:MInt </regstate1>
+    <regstate2> S:String </regstate2>
 endmodule
