@@ -4,6 +4,9 @@ module TEST-SYNTAX
     imports INT
 
     syntax Task ::= "task1" "(" MInt ")" [function]
+    syntax Task ::= MInt
+    syntax MInt ::= rol(MInt, MInt) [function]
+    syntax MInt ::= ror(MInt, MInt) [function]
 
     syntax Tasks ::= List{Task, ""}
 
@@ -28,10 +31,7 @@ module TEST
 
 
 
-    syntax MInt ::= rol(MInt, MInt) [function]
     syntax MInt ::= rolHelper(MInt, Int, Int) [function]
-
-    syntax MInt ::= ror(MInt, MInt) [function]
     syntax MInt ::= rorHelper(MInt, Int, Int) [function]
 
     rule rol(MI1:MInt, MI2:MInt) => rolHelper(MI1, uvalueMInt(MI2),  0)

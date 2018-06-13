@@ -20,3 +20,7 @@ Learning Experience on defining language semantics using [K](https://github.com/
 | Test Name  | Purpose  | 
 |------------|----------|
 | TEST41     | Passing config valriable using -c -p flags    |
+| TEST52     | check maxFloat with Nan/mulfloat    |
+| TEST49     | rol/ror     |
+| TEST8     | shl/r     |
+| TEST24     | shl/r     |
