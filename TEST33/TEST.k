@@ -5,15 +5,15 @@ require "verification-lemmas.k"
 
 // Not Allowed:  <state>     "AB" |->   mi(64, I:Int):MInt
 
-module TEST33-SYNTAX
+module TEST-SYNTAX
     imports DOMAINS-SYNTAX
     syntax Task ::=  "task"
     syntax Tasks ::= List{Task, ""} [klabel(tasklist)]
 
 endmodule
 
-module TEST33
-    imports TEST33-SYNTAX
+module TEST
+    imports TEST-SYNTAX
     imports VERIFICATION-LEMMAS
     imports DOMAINS
     imports MINT
@@ -58,15 +58,28 @@ module TEST33
 
     rule T:Task Ts:Tasks => T ~> Ts
 
+ rule extractMInt(
+      addMInt(
+        concatenateMInt(mi(1, 0), mi(64, I1):MInt),
+        concatenateMInt(mi(1, 0), mi(64, I2):MInt)), 1:Int, 65:Int) 
+  => addMInt(mi(64, I1), mi(64, I2))
+
     rule <k> task => . 
     ...</k>
       <state> ...
             //"AB" |->  (MI1 => addMInt(MI1, #parseToken("MInt@MINT","64'0"):>MInt))
-            "AB" |->  (MI1 => addMInt(MI1, mi(64, 0)))
-            "CD" |->  (MI2 => xorMInt(MI1, MI1))
+            "AB" |->  (
+                MI1 => 
+                extractMInt(
+                addMInt(
+                  concatenateMInt(mi(1, 0), MI1:MInt), 
+                  concatenateMInt(mi(1, 0), MI2:MInt) 
+                  ), 1, 65)
+                )
+            "CD" |->  (MI2)
+            /*
             "YMM" |-> (MI256 => MI256)
             "CF" |-> (MICF => MICF)
-            /*
             "CD2" |->  (MI3 => xorMInt(addMInt(MI1, MI1), addMInt(MI1, MI1)))
             "EF" |->  (MI4 => subMInt(MI1, MI1))
             "GH" |->  (_ => ultMInt(addMInt(MI1, MI1), mi(64, 0)))
@@ -101,8 +114,8 @@ module TEST33
             "F" |-> (
                 _ =>(extractMInt(addMInt(concatenateMInt(mi(1, 0), extractMInt(addMInt(concatenateMInt(mi(15, 0), MICF), mi(16, 65535)), 8, 16)), concatenateMInt(mi(1, 0), extractMInt(addMInt(concatenateMInt(mi(15, 0), MICF), mi(16, 65535)), 8, 16))), 0, 1) )
                 )
-            */
             "BW18" |-> (_ => extractMInt(shlMInt(MI1,  uvalueMInt(addMInt(andMInt(extractMInt(MI1, 56, 64), mi(8, 63)), mi(8, -1))  )), 0, 1))
+            */
 
 
       ...  </state>
