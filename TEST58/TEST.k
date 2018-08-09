@@ -2,7 +2,6 @@ require "domains.k"
 
 module TEST-SYNTAX
     imports DOMAINS-SYNTAX
-    imports MINT
 
     syntax Task ::=  "task" 
     syntax Tasks ::= List{Task, ""} [klabel(tasklist)]
@@ -10,6 +9,8 @@ endmodule
 
 module TEST
     imports TEST-SYNTAX
+    imports DOMAINS
+    imports MINT
 
     configuration 
     <T>
