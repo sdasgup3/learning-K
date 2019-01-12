@@ -5,12 +5,12 @@ module TEST-SYNTAX
  //syntax Instructions ::= List{Instruction, ""} [klabel(instructionlist)]
   syntax Instruction ::=  Opcode Operands
 
-  //syntax Operands ::= List{Operand, ","} [klabel(operandlist)]
-  syntax Operands ::= Int "," Float "," Int
+  syntax Operands ::= List{Operand, ","} [klabel(operandlist)]
+  //syntax Operands ::= Int "," Float "," Int
 
 
-  //syntax Operand ::=  Int
-  //                     | Float
+  syntax Operand ::=  Int
+                       | Float
 
 
   syntax Opcode ::= "pseudofloattestopcode1"
@@ -29,8 +29,8 @@ module TEST
   rule  <k> OpC:Opcode OpR:Operands => execinstr(OpC OpR) ...</k>
 
   rule <k>
-    //execinstr (pseudofloattestopcode1:Opcode I:Int, F:Float,   .Operands) => .
-    execinstr (pseudofloattestopcode1:Opcode I:Int, F:Float, J:Int) => .
+    execinstr (pseudofloattestopcode1:Opcode I:Int, F:Float, J:Int, K:Int, L:Int,   .Operands) => .
+    //execinstr (pseudofloattestopcode1:Opcode I:Int, F:Float, J:Int) => .
   ...</k>
 
 
