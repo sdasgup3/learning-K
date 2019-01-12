@@ -10,7 +10,6 @@ module TEST-SYNTAX
   syntax Instructions ::= List{Instruction, ""} [klabel(instructionlist)]
   syntax Instruction ::=  Opcode Operands
 
-
   syntax Operands ::= List{Operand, ","} [klabel(operandlist)]
 
   syntax Operand ::= Int
