@@ -5,7 +5,7 @@ requires "domains.k"
 
 
 
-module TEST38-SYNTAX
+module TEST-SYNTAX
     imports MINT
     imports DOMAINS-SYNTAX
 
@@ -31,8 +31,8 @@ module TEST38-SYNTAX
 
 endmodule
 
-module TEST38
-    imports TEST38-SYNTAX
+module TEST
+    imports TEST-SYNTAX
     imports DOMAINS
 
 

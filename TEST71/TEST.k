@@ -7,10 +7,13 @@ module TEST-SYNTAX
 
   syntax Task ::= "test1" "(" Float ")" [function]
   syntax Task ::= "test2" "(" Float ")" [function]
-  syntax Task ::= "test3"  [function]
-  syntax Task ::= "test4"  [function]
+  //syntax Task ::= "test3" "(" Float ")" [function]
+  //syntax Task ::= "test4" "(" Float ")" [function]
+
+
   syntax Tasks ::= List{Task, ""}
   syntax Task ::= Bool
+  //syntax Task ::= Int
 endmodule
 
 module TEST
@@ -22,7 +25,7 @@ module TEST
 
     rule test1(F:Float) => isPositiveZero(F)
     rule test2(F:Float) => isNegativeZero(F)
-    rule test3 => isPositiveZero(GetInfinity(53, 11))
-    rule test4 => isNegativeZero(GetInfinity(24, 8))
+    //rule test3(F:Float) => exponentFloat(F)
+    //rule test4(F:Float) => ExponentBitVectorFloat(F)
 
 endmodule
