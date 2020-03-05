@@ -1,0 +1,2 @@
+vmovdqa %ymm0, %ymm0
+xchg %ymm0, %ymm0
