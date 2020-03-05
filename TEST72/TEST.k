@@ -23,7 +23,6 @@ module TEST-SYNTAX
     syntax CodeInMemory ::= code ( Map )
     //syntax GraphDFG ::= graph (Map )
   syntax Abstractinstruction ::= storedInstr(Instruction)
-  syntax KItem ::= "createDFG" [token]
 
 endmodule
 
@@ -36,8 +35,7 @@ module TEST
     configuration 
     <T>
     <k>
-      $PGM:Instructions ~> 
-      createDFG
+      $PGM:Instructions 
     </k>
     <state> 
       ("RAX" |->    mi(64,  0 :Int))
@@ -65,19 +63,5 @@ module TEST
 
   rule  <k>.Instructions => .K ...</k>
 
-
-  rule <k>
-    createDFG => createDFG
-    ...</k>
-      <graph> M:Map => M[  L <- L ]</graph>
-      <text> code( L:MInt |-> storedInstr(OpC OpR) CMap:Map ) </text>
-      <graphiter> L:MInt => addMInt(L, mi(64,1)) </graphiter>
-
-  rule <k>
-    createDFG => .
-    ...</k>
-      <text> code (CMap) </text>
-      <graphiter> L:MInt </graphiter>
-        requires notBool  L  in_keys ( CMap )
 endmodule
 
